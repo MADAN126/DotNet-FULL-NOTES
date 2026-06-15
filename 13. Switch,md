@@ -1,0 +1,1045 @@
+# C# SWITCH
+
+---
+
+# Why Does Switch Exist?
+
+Before learning syntax like:
+
+```csharp
+switch (value)
+{
+    case ...:
+        ...
+        break;
+}
+```
+
+ask a deeper question:
+
+> Why wasn't `if...else if...else` enough?
+
+Imagine building a menu-driven application:
+
+```text
+1 → Create User
+2 → Update User
+3 → Delete User
+4 → Exit
+```
+
+Using only `if...else`:
+
+```csharp
+if(choice == 1)
+{
+}
+else if(choice == 2)
+{
+}
+else if(choice == 3)
+{
+}
+else if(choice == 4)
+{
+}
+```
+
+This works.
+
+But as the number of choices grows:
+
+```text
+10 options
+20 options
+50 options
+```
+
+the code becomes harder to read and maintain.
+
+`switch` exists because:
+
+> Programs often choose one action from many discrete possibilities.
+
+---
+
+# Mental Model
+
+Think of `switch` as:
+
+```text
+A receptionist directing visitors.
+```
+
+Example:
+
+```text
+Visitor says:
+"I want Room 3"
+
+Receptionist:
+↓
+Check room number
+↓
+Send visitor to Room 3
+```
+
+Only one destination is chosen.
+
+---
+
+# What Is a Switch Statement?
+
+A `switch` statement evaluates an expression and executes the matching case.
+
+Example:
+
+```csharp
+switch(day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+}
+```
+
+---
+
+# Why Does It Exist?
+
+Without switch:
+
+Multiple equality checks become repetitive.
+
+Example:
+
+```csharp
+if(day == 1)
+{
+}
+else if(day == 2)
+{
+}
+else if(day == 3)
+{
+}
+```
+
+Switch expresses:
+
+> "Choose one behavior based on this value."
+
+---
+
+# Basic Syntax
+
+```csharp
+switch(expression)
+{
+    case value1:
+        // code
+        break;
+
+    case value2:
+        // code
+        break;
+
+    default:
+        // code
+        break;
+}
+```
+
+---
+
+# Understanding the Components
+
+Example:
+
+```csharp
+switch(day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+
+    default:
+        Console.WriteLine("Unknown");
+        break;
+}
+```
+
+---
+
+# switch
+
+```text
+Start decision process.
+```
+
+---
+
+# Expression
+
+```csharp
+switch(day)
+```
+
+The value being checked.
+
+---
+
+# case
+
+```csharp
+case 1:
+```
+
+Possible matching value.
+
+---
+
+# break
+
+```csharp
+break;
+```
+
+Exit the switch.
+
+---
+
+# default
+
+```csharp
+default:
+```
+
+Fallback when no cases match.
+
+---
+
+# Step-by-Step Execution
+
+Example:
+
+```csharp
+int day = 2;
+
+switch(day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+
+    default:
+        Console.WriteLine("Unknown");
+        break;
+}
+```
+
+Execution:
+
+```text
+day = 2
+↓
+Compare with case 1
+↓
+No match
+↓
+Compare with case 2
+↓
+Match found
+↓
+Execute code
+↓
+break
+↓
+Exit switch
+```
+
+Output:
+
+```text
+Tuesday
+```
+
+---
+
+# Why Is Switch Useful?
+
+Because it improves readability when:
+
+```text
+One variable
+↓
+Compared against
+↓
+Many known values
+```
+
+---
+
+# Switch vs If...Else
+
+Example using if:
+
+```csharp
+if(day == 1)
+{
+    Console.WriteLine("Monday");
+}
+else if(day == 2)
+{
+    Console.WriteLine("Tuesday");
+}
+else if(day == 3)
+{
+    Console.WriteLine("Wednesday");
+}
+```
+
+---
+
+# Same Logic Using Switch
+
+```csharp
+switch(day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+
+    case 3:
+        Console.WriteLine("Wednesday");
+        break;
+}
+```
+
+---
+
+# Mental Model
+
+If:
+
+```text
+Decision based on many unrelated conditions
+```
+
+Use:
+
+```text
+if...else
+```
+
+If:
+
+```text
+Decision based on one value matching many possibilities
+```
+
+Use:
+
+```text
+switch
+```
+
+---
+
+# The break Statement
+
+---
+
+# What Is break?
+
+`break` immediately exits the switch statement.
+
+Example:
+
+```csharp
+case 1:
+    Console.WriteLine("One");
+    break;
+```
+
+---
+
+# Why Does It Exist?
+
+Without break:
+
+Execution could continue into other cases.
+
+C# prevents accidental fall-through.
+
+---
+
+# Mental Model
+
+Think:
+
+```text
+Match found
+↓
+Do work
+↓
+Leave building
+```
+
+---
+
+# Hidden Behavior
+
+Unlike C and C++:
+
+C# does NOT allow accidental fall-through.
+
+Incorrect:
+
+```csharp
+case 1:
+    Console.WriteLine("One");
+
+case 2:
+    Console.WriteLine("Two");
+```
+
+Compilation Error.
+
+---
+
+# Why?
+
+Because fall-through bugs were common.
+
+C# prioritizes safety.
+
+---
+
+# The default Case
+
+---
+
+# What Is default?
+
+Executed when no case matches.
+
+Example:
+
+```csharp
+default:
+    Console.WriteLine("Invalid Option");
+    break;
+```
+
+---
+
+# Mental Model
+
+Think of it as:
+
+```text
+None of the above.
+```
+
+---
+
+# Example
+
+```csharp
+int month = 15;
+
+switch(month)
+{
+    case 1:
+        Console.WriteLine("January");
+        break;
+
+    default:
+        Console.WriteLine("Invalid Month");
+        break;
+}
+```
+
+Output:
+
+```text
+Invalid Month
+```
+
+---
+
+# Why Is default Important?
+
+Without it:
+
+Unexpected values may go unhandled.
+
+---
+
+# Grouping Cases
+
+---
+
+# What Is Grouping?
+
+Multiple cases can execute the same code.
+
+Example:
+
+```csharp
+switch(day)
+{
+    case 6:
+    case 7:
+        Console.WriteLine("Weekend");
+        break;
+
+    default:
+        Console.WriteLine("Weekday");
+        break;
+}
+```
+
+---
+
+# Output
+
+Input:
+
+```text
+6
+```
+
+Output:
+
+```text
+Weekend
+```
+
+---
+
+Input:
+
+```text
+7
+```
+
+Output:
+
+```text
+Weekend
+```
+
+---
+
+# Why Does This Exist?
+
+Avoid duplicate code.
+
+---
+
+# Supported Types
+
+Switch works with:
+
+```text
+int
+char
+string
+enum
+bool
+```
+
+and many other types supported by modern C#.
+
+---
+
+# Switch with Strings
+
+Example:
+
+```csharp
+string role = "Admin";
+
+switch(role)
+{
+    case "Admin":
+        Console.WriteLine("Full Access");
+        break;
+
+    case "User":
+        Console.WriteLine("Limited Access");
+        break;
+
+    default:
+        Console.WriteLine("Unknown Role");
+        break;
+}
+```
+
+---
+
+# Real-World Usage
+
+Authentication.
+
+Menu systems.
+
+Role-based access.
+
+Command processing.
+
+API request routing.
+
+Game state management.
+
+---
+
+# Switch Expressions (Modern C#)
+
+One of the biggest improvements.
+
+---
+
+# What Is a Switch Expression?
+
+A concise form that returns a value.
+
+Example:
+
+```csharp
+int day = 2;
+
+string result = day switch
+{
+    1 => "Monday",
+    2 => "Tuesday",
+    3 => "Wednesday",
+    _ => "Unknown"
+};
+
+Console.WriteLine(result);
+```
+
+Output:
+
+```text
+Tuesday
+```
+
+---
+
+# Mental Model
+
+Traditional Switch:
+
+```text
+Choose action.
+```
+
+Switch Expression:
+
+```text
+Choose value.
+```
+
+---
+
+# Traditional Switch vs Switch Expression
+
+| Feature | Traditional Switch | Switch Expression |
+|----------|-------------------|-------------------|
+| Introduced | Earlier C# | Modern C# |
+| Returns Value | Usually No | Yes |
+| Syntax | Verbose | Concise |
+| Readability | Good | Excellent |
+| Preferred For | Complex actions | Value mapping |
+
+---
+
+# Internal Working
+
+Execution:
+
+```text
+Evaluate Expression
+↓
+Compare Cases
+↓
+Find Match
+↓
+Execute Case
+↓
+Exit Switch
+```
+
+---
+
+# Hidden Behaviors and Edge Cases
+
+---
+
+# Only One Matching Case Executes
+
+Example:
+
+```csharp
+switch(2)
+{
+    case 1:
+        break;
+
+    case 2:
+        break;
+
+    case 3:
+        break;
+}
+```
+
+Only:
+
+```text
+case 2
+```
+
+runs.
+
+---
+
+# Order Usually Doesn't Matter
+
+Unlike `if...else`.
+
+Example:
+
+```csharp
+case 100:
+case 1:
+case 50:
+```
+
+Matching still works.
+
+---
+
+# default Is Optional
+
+Valid:
+
+```csharp
+switch(number)
+{
+    case 1:
+        break;
+}
+```
+
+But not recommended.
+
+---
+
+# Cases Must Be Unique
+
+Incorrect:
+
+```csharp
+case 1:
+    break;
+
+case 1:
+    break;
+```
+
+Compilation Error.
+
+---
+
+# Switch Uses Equality Matching
+
+Switch asks:
+
+```text
+Does this value equal this case?
+```
+
+It does NOT ask:
+
+```text
+Greater than?
+Less than?
+Complex conditions?
+```
+
+---
+
+# When Should You Use Switch?
+
+Use switch when:
+
+```text
+One value
+↓
+Many exact matches
+```
+
+Examples:
+
+```text
+Menu options
+Days of week
+Roles
+Commands
+States
+Enums
+```
+
+---
+
+# When Should You Avoid Switch?
+
+Avoid switch when:
+
+```text
+Conditions involve ranges.
+
+Complex boolean expressions.
+
+Multiple unrelated variables.
+```
+
+Example:
+
+Better with if:
+
+```csharp
+if(age >= 18 && hasLicense)
+{
+}
+```
+
+---
+
+# Common Beginner Mistakes
+
+---
+
+# Mistake 1: Forgetting break
+
+Although C# often protects against this, understanding break is important.
+
+---
+
+# Mistake 2: Using Switch for Range Checks
+
+Bad:
+
+```text
+90–100
+80–89
+70–79
+```
+
+Use `if...else`.
+
+---
+
+# Mistake 3: Omitting default
+
+Unexpected values remain unhandled.
+
+---
+
+# Mistake 4: Duplicate Cases
+
+Compilation Error.
+
+---
+
+# Mistake 5: Choosing If When Switch Is Clearer
+
+Leads to unnecessary complexity.
+
+---
+
+# Real-World Usage
+
+---
+
+# ATM Menu
+
+```csharp
+switch(option)
+{
+    case 1:
+        Withdraw();
+        break;
+
+    case 2:
+        Deposit();
+        break;
+}
+```
+
+---
+
+# User Roles
+
+```csharp
+switch(role)
+{
+    case "Admin":
+        break;
+
+    case "User":
+        break;
+}
+```
+
+---
+
+# Game States
+
+```csharp
+switch(gameState)
+{
+    case GameState.Playing:
+        break;
+
+    case GameState.Paused:
+        break;
+}
+```
+
+---
+
+# API Commands
+
+```csharp
+switch(command)
+{
+    case "CREATE":
+        break;
+
+    case "DELETE":
+        break;
+}
+```
+
+---
+
+# Interview Perspective
+
+## What is a switch statement?
+
+Answer:
+
+A switch statement selects and executes one block of code based on matching a single expression against multiple cases.
+
+---
+
+## Why use switch instead of if...else?
+
+Answer:
+
+It improves readability and maintainability when comparing one value against many exact matches.
+
+---
+
+## What does break do?
+
+Answer:
+
+It exits the switch statement after executing a case.
+
+---
+
+## What is default?
+
+Answer:
+
+A fallback block that executes when no case matches.
+
+---
+
+## Can multiple cases share code?
+
+Answer:
+
+Yes. Cases can be grouped to execute the same logic.
+
+Example:
+
+```csharp
+case 6:
+case 7:
+    Console.WriteLine("Weekend");
+    break;
+```
+
+---
+
+## What is a switch expression?
+
+Answer:
+
+A modern, concise form of switch that returns a value using expression syntax.
+
+---
+
+# Best Practices Followed by Experienced Developers
+
+- Use switch for exact value matching.
+- Always include a default case.
+- Prefer switch expressions for simple value mapping.
+- Group related cases to avoid duplication.
+- Use enums with switch whenever possible.
+- Avoid switch for complex boolean logic.
+- Keep each case focused and readable.
+- Choose the construct that best expresses intent.
+
+---
+
+# Final Mental Model
+
+Think of `switch` as a routing system.
+
+```text
+One Input Value
+↓
+Compare Against Known Cases
+↓
+Find Matching Destination
+↓
+Execute Corresponding Logic
+↓
+Exit Decision Structure
+↓
+Continue Program
+```
+
+A beginner sees:
+
+```csharp
+switch(day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+}
+```
+
+as syntax.
+
+An experienced engineer sees:
+
+> A structured dispatch mechanism that cleanly maps a known set of input values to corresponding behaviors, reducing repetitive equality checks and making business rules easier to understand, extend, and maintain.
